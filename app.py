@@ -742,3 +742,19 @@ print("=" * 60)
 bot.send_message(CHAT_ID, "🚀 *بوت التداول الاحترافي بدأ العمل!*\n\n📊 *المؤشرات:* RSI, MACD, Bollinger, Stochastic, ATR, OBV\n🧠 *التقنية:* Random Forest (تعلم آلي)\n\n💡 أرسل `/daily` للحصول على أفضل الفرص", parse_mode='Markdown')
 
 bot.infinity_polling()
+# ========== للتشغيل على Render ==========
+from flask import Flask
+import threading
+
+flask_app = Flask(__name__)
+
+@flask_app.route('/')
+def health_check():
+    return "Bot is alive!", 200
+
+def run_flask():
+    flask_app.run(host='0.0.0.0', port=10000)
+
+# تشغيل Flask في خلفية
+threading.Thread(target=run_flask, daemon=True).start()
+# ==========================================
